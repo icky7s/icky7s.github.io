@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tiktok Scraper</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+    const query = new URLSearchParams(window.location.search);
+    if (query.length === 0) {
+        document.write("{\"code\": 0, \"message\": \"Missing parameters\"}");
+    } else {
+        const url = query.get('url'), ttwid = query.get('ttwid');
+        if (!url) {
+            document.write("{\"code\": 0, \"message\": \"Missing URL\"}");
+        } else {
+            if (!ttwid) {
+                document.write("{\"code\": 0, \"message\": \"Missing TTWID\"}");
+            } else {
+                const request = fetch(url);
+                request.then(response =>
+                    response.json()).then(data => {
+                        document.write(data);
+                });
+                // const xhr = new XMLHttpRequest();
+                // xhr.open('GET', url);
+                // xhr.onload = function() {
+                //     if (xhr.status >= 200 && xhr.status < 300) {
+                //         console.log('Success:', xhr.response);
+                //     } else {
+                //         console.error('Request failed with status:', xhr.status);
+                //     }
+                // };
+                //
+                // xhr.onerror = function() {
+                //     console.error('Network error occurred');
+                // };
+                //
+                // xhr.send();
+            }
+        }
+    }
+</script>
+</html>
